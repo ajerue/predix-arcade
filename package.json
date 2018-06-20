@@ -27,7 +27,7 @@
     "watch-css": "node-sass-chokidar src/ -o src/ --watch",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
+    "build": "npm run build-css && react-scripts build && cp Staticfile build/ && cp public/roms/*.nes build/roms",
     "test": "prettier-check src/**/*.js && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.js"
