@@ -4,15 +4,15 @@ import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const roms = {
-  "Donkey_Kong.nes": "Donkey Kong",
-  "Duck_Hunt.nes": "Duck Hunt",
-  "The_Legend_of_Zelda.nes": "The Legend of Zelda",
-  "Mega_Man.nes": "Mega Man",
-  "Metroid.nes": "Metroid",
-  "Pac-Man.nes": "Pac-Man",
-  "Super_Mario_Bros.nes": "Super Mario Bros.",
-  "Teenage_Mutant_Ninja_Turtles_II_-_The_Arcade_Game.nes": "Teenage Mutant Ninja Turtles II - The Arcade Game",
-  "Tetris.nes": "Tetris"
+  "Indivisible.nes": "Indivisible",
+  "MadWizard.nes": "Mad Wizard",
+  "Rock9b.nes": "Rock Paper Scissors Lizard Sbock",
+  "Super Bat Puncher Demo.nes": "Super Bat Puncher (Demo)",
+  "Super_Tilt_Bro_v4.nes": "Super Tilt Bro.",
+  "dpadhero.nes": "D-Pad Hero",
+  "dpadhero2.nes": "D-Pad Hero II",
+  "micro_knight_4_v1.02.nes": "Micro Knight 4",
+  "owlia.nes": "Legends of Owlia"
 };
 
 class ListPage extends Component {
