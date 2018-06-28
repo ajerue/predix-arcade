@@ -1,0 +1,12 @@
+---
+applications:
+- name: <APP_NAME>
+  memory: 256MB
+  buildpack: https://github.com/cloudfoundry/python-buildpack.git
+  services:
+   - <PREDIX_UAA_SERVICE>
+   - <PREDIX_TIMESERIES_SERVICE>
+  env:
+    FLASK_CONFIG: Predix
+    PREDIX_APP_CLIENT_ID: <PREDIX_APP_CLIENT_ID>
+    PREDIX_APP_CLIENT_SECRET: <PREDIX_APP_CLIENT_SECRET>
