@@ -1,4 +1,6 @@
 import { Controller } from "jsnes";
+import { uploadTimeseries } from "./utils";
+import config from "./config";
 
 // Mapping keyboard code to [controller, button]
 const KEYS = {
@@ -31,6 +33,11 @@ export default class KeyboardController {
     var key = KEYS[e.keyCode];
     if (key) {
       this.onButtonDown(key[0], key[1]);
+      const buttonState = 1;
+      let buttonName = e.key.toUpperCase();
+      let formattedName = config.ASSET_NAME + ':BUTTON_' + buttonName;
+      let data = JSON.stringify({'datapoints': [{'name': formattedName, 'value': buttonState}]});
+      uploadTimeseries(data);
       e.preventDefault();
     }
   };

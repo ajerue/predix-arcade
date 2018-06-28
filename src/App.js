@@ -4,11 +4,14 @@ import ListPage from "./ListPage";
 import RunPage from "./RunPage";
 import { handleError } from "./utils";
 import "./App.css";
+import AppTimer from "./AppTimer";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { error: null };
+    this.appTimer = new AppTimer();
+    this.appTimer.start();
   }
 
   render() {
@@ -36,6 +39,7 @@ class App extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error });
+    this.appTimer.stop(); // Stop Timer if error occurred
     handleError(error, errorInfo);
   }
 }

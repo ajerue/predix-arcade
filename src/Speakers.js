@@ -56,10 +56,6 @@ export default class Speakers {
       // underrun
 
       // ignore empty buffers... assume audio has just stopped
-      var bufferSize = this.buffer.size() / 2;
-      if (bufferSize > 0) {
-        console.log(`Buffer underrun (needed ${size}, got ${bufferSize})`);
-      }
       for (var j = 0; j < size; j++) {
         left[j] = 0;
         right[j] = 0;

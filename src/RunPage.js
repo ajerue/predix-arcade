@@ -10,6 +10,7 @@ import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
 import { NES } from "jsnes";
+import { incrementPlayCount } from "./utils";
 
 function loadBinary(path, callback, handleProgress) {
   var req = new XMLHttpRequest();
@@ -123,7 +124,7 @@ class RunPage extends Component {
 
   componentDidMount() {
     this.speakers = new Speakers({
-      onBufferUnderrun: (actualSize, desiredSize) => {
+      onBufferUnderrun: (desiredSize) => {
         if (!this.state.running || this.state.paused) {
           return;
         }
@@ -135,15 +136,11 @@ class RunPage extends Component {
         //   done by audio instead of requestAnimationFrame.
         // - System can't run emulator at full speed. In this case it'll stop
         //    firing requestAnimationFrame.
-        console.log(
-          "Buffer underrun, running another frame to try and catch up"
-        );
         this.nes.frame();
         // desiredSize will be 2048, and the NES produces 1468 samples on each
         // frame so we might need a second frame to be run. Give up after that
         // though -- the system is not catching up
         if (this.speakers.buffer.size() < desiredSize) {
-          console.log("Still buffer underrun, running a second frame");
           this.nes.frame();
         }
       }
@@ -196,6 +193,8 @@ class RunPage extends Component {
   load = () => {
     if (this.props.match.params.rom) {
       const path = config.BASE_ROM_URL + this.props.match.params.rom;
+      let tagName = config.ASSET_NAME + ":NES:" + this.props.match.params.rom.replace('.nes', '').replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toUpperCase() + ":PLAY_COUNT";
+      incrementPlayCount(tagName);
       this.currentRequest = loadBinary(
         path,
         (err, data) => {
@@ -234,15 +233,11 @@ class RunPage extends Component {
   start = () => {
     this.frameTimer.start();
     this.speakers.start();
-    this.fpsInterval = setInterval(() => {
-      console.log(`FPS: ${this.nes.getFPS()}`);
-    }, 1000);
   };
 
   stop = () => {
     this.frameTimer.stop();
     this.speakers.stop();
-    clearInterval(this.fpsInterval);
   };
 
   handlePauseResume = () => {
