@@ -12,7 +12,8 @@ const roms = {
   "dpadhero.nes": "D-Pad Hero",
   "dpadhero2.nes": "D-Pad Hero II",
   "micro_knight_4_v1.02.nes": "Micro Knight 4",
-  "owlia.nes": "Legends of Owlia"
+  "owlia.nes": "Legends of Owlia",
+  "lj65.nes": "LJ65"
 };
 
 class ListPage extends Component {
