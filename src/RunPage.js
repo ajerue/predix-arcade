@@ -6,6 +6,7 @@ import "./RunPage.css";
 import config from "./config";
 import ControlsModal from "./ControlsModal";
 import FrameTimer from "./FrameTimer";
+import GameTimer from "./GameTimer";
 import KeyboardController from "./KeyboardController";
 import Screen from "./Screen";
 import Speakers from "./Speakers";
@@ -156,16 +157,17 @@ class RunPage extends Component {
       onWriteFrame: Raven.wrap(this.screen.writeBuffer)
     });
 
+    this.gameTimer = new GameTimer({
+      romName: this.props.match.params.rom
+    });
+
     this.keyboardController = new KeyboardController({
       onButtonDown: this.nes.buttonDown,
       onButtonUp: this.nes.buttonUp
     });
     document.addEventListener("keydown", this.keyboardController.handleKeyDown);
     document.addEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.addEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
-    );
+    document.addEventListener("keypress", this.keyboardController.handleKeyPress);
 
     window.addEventListener("resize", this.layout);
     this.layout();
@@ -178,23 +180,16 @@ class RunPage extends Component {
       this.currentRequest.abort();
     }
     this.stop();
-    document.removeEventListener(
-      "keydown",
-      this.keyboardController.handleKeyDown
-    );
+    document.removeEventListener("keydown", this.keyboardController.handleKeyDown);
     document.removeEventListener("keyup", this.keyboardController.handleKeyUp);
-    document.removeEventListener(
-      "keypress",
-      this.keyboardController.handleKeyPress
-    );
+    document.removeEventListener("keypress", this.keyboardController.handleKeyPress);
     window.removeEventListener("resize", this.layout);
   }
 
   load = () => {
     if (this.props.match.params.rom) {
       const path = config.BASE_ROM_URL + this.props.match.params.rom;
-      let tagName = config.ASSET_NAME + ":NES:" + this.props.match.params.rom.replace('.nes', '').replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toUpperCase() + ":PLAY_COUNT";
-      incrementPlayCount(tagName);
+      incrementPlayCount(this.props.match.params.rom);
       this.currentRequest = loadBinary(
         path,
         (err, data) => {
@@ -233,11 +228,13 @@ class RunPage extends Component {
   start = () => {
     this.frameTimer.start();
     this.speakers.start();
+    this.gameTimer.start();
   };
 
   stop = () => {
     this.frameTimer.stop();
     this.speakers.stop();
+    this.gameTimer.stop();
   };
 
   handlePauseResume = () => {

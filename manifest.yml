@@ -1,0 +1,7 @@
+---
+applications:
+- name: predix-jsnes
+  memory: 256MB
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  path: build
+  random-route: true
