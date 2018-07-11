@@ -4,20 +4,26 @@ A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes) ready for Pred
 
 ## Development Setup
 
+If you're working through my Predix Arcade series, this dashboard is the 2nd step in creating a full Predix Arcade app that monitors an arcade asset (NES emulator). Be sure to go back to any README tutorials that you have not yet completed.
+
+1. **[Predix Arcade Data Client](https://github.com/futuregarnet/predix-arcade-data-client#predix-arcade-data-client)**
+1. [Predix Arcade](https://github.com/futuregarnet/predix-arcade#predix-arcade)
+1. [Predix Arcade Dashboard Starter Kit](https://github.com/futuregarnet/predix-arcade-dashboard-starter-kit#predix-arcade-dashboard-starter-kit)
+
 Clone or download and extract the source code:
 
 ```Shell
-git clone https://github.com/futuregarnet/predix-jsnes.git
-cd predix-jsnes
+git clone https://github.com/futuregarnet/predix-arcade.git
+cd predix-arcade
 ```
 
-### Install Tools
+### Package Manager Installation
 
 If you don't have them already, you'll need yarn (with Node.js) installed:
 
-1. Install [yarn](https://yarnpkg.com/en/docs/install).
+1. Install [yarn](https://yarnpkg.com/en/docs/install)
 
-### Install the Dependencies
+### Dependency Installation
 
 This app uses packages managed by yarn. Issue the following command to install them:
 
@@ -25,16 +31,14 @@ This app uses packages managed by yarn. Issue the following command to install t
 yarn
 ```
 
-### Local Configuration Files
+### Local Configuration
 
-You will need to create a Predix Timeseries instance and update the config.py file with its details.
-
-To learn how to create a Predix Timeseries instance, follow [this guide](https://www.predix.io/resources/tutorials/tutorial-details.html?tutorial_id=1549).
+Predix Arcade needs Predix Time Series-based data client (API) for retriving arcade data. Complete [Step 1](https://github.com/futuregarnet/predix-arcade-data-client.git) to deploy the Predix Arcade Data Client.
 
 Edit the src/config.js file and add the following details:
 
-- **ASSET_NAME**: The name for your Predix Arcade (used for Timeseries Tags)
-- **TIMESERIES_API_URL**: Your Time Series API (Data Client) URL
+- **<ASSET_NAME>**: The name for your Predix Arcade (used for Timeseries Tags)
+- **<TIMESERIES_API_URL>**: Your Time Series API (Data Client) URL
 
 ## Local Development
 
@@ -46,9 +50,7 @@ yarn start
 
 This command will compile code for local development and watch changes for file. Your browser should automatically open [localhost:3000](http://localhost:3000).
 
-## Deployment
-
-The manifest.yml file is used for application configuration on the Predix platform. No edits are required, but you can update the **name** to a custom application name and remove the **random-route** attribute.
+## Predix Deployment
 
 Use the following commands to compile code and push to Predix:
 
@@ -60,3 +62,4 @@ cf push [-n <APP_NAME>]
 Optional Parameters:
 
 - `-n`: Provide a custom app name (also used for the URL)
+  - You can also update the **name** attribute in `manifest.yml` to a custom app name and remove the **random-route** attribute to avoid this parameter.
