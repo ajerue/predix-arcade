@@ -6,8 +6,8 @@ A React-based web UI for [JSNES](https://github.com/bfirsh/jsnes) ready for Pred
 
 If you're working through my Predix Arcade series, this dashboard is the 2nd step in creating a full Predix Arcade app that monitors an arcade asset (NES emulator). Be sure to go back to any README tutorials that you have not yet completed.
 
-1. **[Predix Arcade Data Client](https://github.com/futuregarnet/predix-arcade-data-client#predix-arcade-data-client)**
-1. [Predix Arcade](https://github.com/futuregarnet/predix-arcade#predix-arcade)
+1. [Predix Arcade Data Client](https://github.com/futuregarnet/predix-arcade-data-client#predix-arcade-data-client)
+1. **[Predix Arcade](https://github.com/futuregarnet/predix-arcade#predix-arcade)**
 1. [Predix Arcade Dashboard Starter Kit](https://github.com/futuregarnet/predix-arcade-dashboard-starter-kit#predix-arcade-dashboard-starter-kit)
 
 Clone or download and extract the source code:
